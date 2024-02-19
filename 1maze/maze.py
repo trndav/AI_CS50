@@ -1,3 +1,8 @@
+# Run like: python maze.py maze1.txt
+# And: code maze.png
+# In last line add/remove show_explored=True for maze.png display options
+# Stack or Queue: frontier = QueueFrontier() # or StackFrontier()
+
 import sys
 
 class Node():
@@ -5,7 +10,6 @@ class Node():
         self.state = state
         self.parent = parent
         self.action = action
-
 
 class StackFrontier():
     def __init__(self):
@@ -28,9 +32,7 @@ class StackFrontier():
             self.frontier = self.frontier[:-1]
             return node
 
-
 class QueueFrontier(StackFrontier):
-
     def remove(self):
         if self.empty():
             raise Exception("empty frontier")
@@ -40,9 +42,7 @@ class QueueFrontier(StackFrontier):
             return node
 
 class Maze():
-
     def __init__(self, filename):
-
         # Read file and set height and width of maze
         with open(filename) as f:
             contents = f.read()
@@ -56,7 +56,7 @@ class Maze():
         # Determine height and width of maze
         contents = contents.splitlines()
         self.height = len(contents)
-        self.width = max(len(line) for line in contents)
+        self.width = max(len(line) for line in contents) # finds the length of the longest line
 
         # Keep track of walls
         self.walls = []
@@ -77,9 +77,7 @@ class Maze():
                 except IndexError:
                     row.append(False)
             self.walls.append(row)
-
         self.solution = None
-
 
     def print(self):
         solution = self.solution[1] if self.solution is not None else None
@@ -124,7 +122,7 @@ class Maze():
 
         # Initialize frontier to just the starting position
         start = Node(state=self.start, parent=None, action=None)
-        frontier = StackFrontier()
+        frontier = QueueFrontier() # or StackFrontier()
         frontier.add(start)
 
         # Initialize an empty explored set
@@ -216,7 +214,7 @@ class Maze():
 
 
 if len(sys.argv) != 2:
-    sys.exit("Usage: python maze.py maze.txt")
+    sys.exit("Usage: python maze.py maze1.txt")
 
 m = Maze(sys.argv[1])
 print("Maze:")
@@ -226,4 +224,4 @@ m.solve()
 print("States Explored:", m.num_explored)
 print("Solution:")
 m.print()
-m.output_image("maze.png", show_explored=True)
+m.output_image("maze.png", show_explored=True) # add show_explored=True
