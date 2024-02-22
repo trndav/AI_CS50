@@ -97,7 +97,6 @@ class Maze():
             print()
         print()
 
-
     def neighbors(self, state):
         row, col = state
         candidates = [
@@ -113,11 +112,8 @@ class Maze():
                 result.append((action, (r, c)))
         return result
 
-
     def solve(self):
         """Finds a solution to maze, if one exists."""
-
-        # Keep track of number of states explored
         self.num_explored = 0
 
         # Initialize frontier to just the starting position
@@ -160,7 +156,6 @@ class Maze():
                 if not frontier.contains_state(state) and state not in self.explored:
                     child = Node(state=state, parent=node, action=action)
                     frontier.add(child)
-
 
     def output_image(self, filename, show_solution=True, show_explored=False):
         from PIL import Image, ImageDraw
@@ -211,7 +206,6 @@ class Maze():
                 )
 
         img.save(filename)
-
 
 if len(sys.argv) != 2:
     sys.exit("Usage: python maze.py maze1.txt")
