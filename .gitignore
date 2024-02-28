@@ -2,6 +2,9 @@
 2degrees/large/movies.csv
 2degrees/large/people.csv
 2degrees/large/stars.csv
+18markov/shakespeare.txt
+20vectors/words.txt
 
 # Directories
 15traffic/gtsrb
+17ngrams/holmes
